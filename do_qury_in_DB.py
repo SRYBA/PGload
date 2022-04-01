@@ -22,11 +22,9 @@ def main():
             for index, text_query in enumerate(file):
                 try:
                     run_db_query(pg_cursor, text_query)
-
                 except (Exception, psy.Error) as error:
                     if error is ' no results to fetch':
                         pg_cursor.execute("ROLLBACK")
-
                     else:
                         print("Error from PG-server:", error)
                         pg_cursor.execute("ROLLBACK")

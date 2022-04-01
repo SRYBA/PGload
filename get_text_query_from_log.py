@@ -38,12 +38,9 @@ def read_all_lines(number_of_lines):
                 file_query.write(query_row)
                 file_query.close()
 
-def main():
-# calculate numbers of cycle
-fp = open('C:\\temp\\!1-short.log', 'r', encoding="utf-8")
-number_of_lines = len(fp.readlines())
-fp.close()
-read_all_lines(number_of_lines)
-
 if __name__ == '__main__':
-    main()
+    #main()
+    fs = open('C:\\temp\\!1-short.log', 'r', encoding="utf-8")
+    number_of_lines = len(fs.readlines())
+    fs.close()
+    read_all_lines(number_of_lines)
