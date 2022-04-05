@@ -1,3 +1,9 @@
+import do_qury_in_DB as run_query_in_DB
+
+# global variables
+path_to_row_file = 'C:\\temp\\!1.log'
+path_to_querys_file = 'C:\\temp\\!query.txt'
+
 # read data from file and write result into new file
 def read_all_lines(number_of_lines):
     # variables for partition
@@ -5,7 +11,7 @@ def read_all_lines(number_of_lines):
     tail2 = ''
     query_row = ''
     # r first line
-    with open('C:\\temp\\!1-short.log', 'r', encoding="utf-8") as file_row_data :
+    with open(path_to_row_file , 'r', encoding="utf-8") as file_row_data:
         for number_of_lines_culc in range(number_of_lines):
             file_row_string = file_row_data.readline()
             # is there any query?
@@ -34,13 +40,15 @@ def read_all_lines(number_of_lines):
                         query_row = query_row.replace('$' + str(number_of_param), list_of_parameters[i])
                         number_of_param += 1
                 # wr in file with queries text
-                file_query = open("C:\\temp\\!!query-short.txt", "a")
+                file_query = open(path_to_querys_file, "a")
                 file_query.write(query_row)
                 file_query.close()
 
+
 if __name__ == '__main__':
-    #main()
-    fs = open('C:\\temp\\!1-short.log', 'r', encoding="utf-8")
+    # main()
+    fs = open(path_to_row_file , 'r', encoding="utf-8")
     number_of_lines = len(fs.readlines())
     fs.close()
     read_all_lines(number_of_lines)
+    run_query_in_DB(path_to_querys_file)

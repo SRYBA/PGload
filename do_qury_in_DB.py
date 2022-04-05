@@ -8,7 +8,7 @@ def run_db_query(cursor, text_query):
     for row in query_result:
         print("n_id  = ", row, "\n")
 
-def main():
+def main(path_to_querys_file):
         connection_to_pg = psy.connect(user="postgres",
                                       password="postgres",
                                       host="172.23.51.56",
@@ -18,7 +18,7 @@ def main():
         pg_cursor = connection_to_pg.cursor()
 
         # get queries from file and run on DB
-        with open('C:\\temp\\!query.txt') as file:
+        with open(path_to_querys_file) as file:
             for index, text_query in enumerate(file):
                 try:
                     run_db_query(pg_cursor, text_query)
@@ -37,5 +37,5 @@ def main():
         else:
             print("PostgreSQL connection didn't close")
 
-if __name__ == '__main__':
-    main()
+#if __name__ == '__main__':
+#    main(path_to_querys_file)
