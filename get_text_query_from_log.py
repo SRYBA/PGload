@@ -1,8 +1,8 @@
 import do_qury_in_DB as run_query_in_DB
 
 # global variables
-path_to_row_file = 'C:\\temp\\!1.log'
-path_to_querys_file = 'C:\\temp\\!query.txt'
+path_to_row_file = 'C:\\Users\\RybakSA\\Desktop\\Скрипты постгрес\\!!!!!work\\1с\\logs\\postgresql-2022-04-06_162155.log'
+path_to_querys_file = 'C:\\Users\\RybakSA\\Desktop\\Скрипты постгрес\\!!!!!work\\1с\\logs\\!query.txt'
 
 # read data from file and write result into new file
 def read_all_lines(number_of_lines):
@@ -44,11 +44,10 @@ def read_all_lines(number_of_lines):
                 file_query.write(query_row)
                 file_query.close()
 
-
 if __name__ == '__main__':
     # main()
     fs = open(path_to_row_file , 'r', encoding="utf-8")
     number_of_lines = len(fs.readlines())
     fs.close()
     read_all_lines(number_of_lines)
-    run_query_in_DB(path_to_querys_file)
+#   run_query_in_DB(path_to_querys_file)

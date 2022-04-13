@@ -1,17 +1,22 @@
 import psycopg2 as psy
+import datetime as time
+
+path_to_querys_file = 'C:\\Users\\RybakSA\\Desktop\\Скрипты постгрес\\!!!!!work\\1с\\logs\\!query.txt'
 
 def run_db_query(cursor, text_query):
     #print("Run query on PG")
     cursor.execute(text_query)
     query_result = cursor.fetchall()
-    print("Print each row of query result")
-    for row in query_result:
-        print("n_id  = ", row, "\n")
+    #testing output
+    #print("Print each row of query result")
+    #for row in query_result:
+    #    print("n_id  = ", row, "\n")
 
 def main(path_to_querys_file):
+        #test conection to DB
         connection_to_pg = psy.connect(user="postgres",
-                                      password="postgres",
-                                      host="172.23.51.56",
+                                      password="Gazprom09",
+                                      host="192.168.102.131",
                                       port="5432",
                                       database="esb")
         # open connection to DB
@@ -26,7 +31,8 @@ def main(path_to_querys_file):
                     if error is ' no results to fetch':
                         pg_cursor.execute("ROLLBACK")
                     else:
-                        print("Error from PG-server:", error)
+                        # testing output
+                        # print("Error from PG-server:", error)
                         pg_cursor.execute("ROLLBACK")
 
         # close connection to DB
@@ -37,5 +43,8 @@ def main(path_to_querys_file):
         else:
             print("PostgreSQL connection didn't close")
 
-#if __name__ == '__main__':
-#    main(path_to_querys_file)
+if __name__ == '__main__':
+    start_time = time.datetime.now()
+    main(path_to_querys_file)
+    print("Start time:%s:%s:%s" % (start_time.hour, start_time.minute, start_time.second))
+    print("End time:%s:%s:%s" % (time.datetime.now().hour, time.datetime.now().minute, time.datetime.now().second))

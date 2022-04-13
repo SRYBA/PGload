@@ -5,7 +5,7 @@ def read_all_lines(number_of_lines):
     tail2 = ''
     query_row = ''
     # r first line
-    with open('C:\\temp\\!1-short.log', 'r', encoding="utf-8") as file_row_data :
+    with open('C:\\Users\\RybakSA\\Desktop\\Скрипты постгрес\\!!!!!work\\1с\\logs\\postgresql-2022-04-06_163614.log', 'r', encoding="utf-8") as file_row_data :
         for number_of_lines_culc in range(number_of_lines):
             file_row_string = file_row_data.readline()
             # is there any query?
@@ -30,14 +30,15 @@ def read_all_lines(number_of_lines):
                         query_row = query_row.replace('$' + str(number_of_param), list_of_parameters[i])
                         number_of_param += 1
                 # wr in file with queries text
-                file_query = open('!!query-short.txt', "a")
+                file_query = open('C:\\Users\\RybakSA\\Desktop\\Скрипты постгрес\\!!!!!work\\1с\\logs\\!query.txt', "a")
                 file_query.write(query_row)
                 file_query.close()
 
 if __name__ == '__main__':
     #main()
-    fp = open('C:\\temp\\!1-short.log', 'r', encoding="utf-8")
+    fp = open('C:\\Users\\RybakSA\\Desktop\\Скрипты постгрес\\!!!!!work\\1с\\logs\\!query.txt', 'r')
     number_of_lines = len(fp.readlines())
     fp.close()
-    read_all_lines(number_of_lines)
+    print(number_of_lines)
+ #   read_all_lines(number_of_lines)
 
