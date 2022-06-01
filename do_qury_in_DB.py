@@ -1,5 +1,6 @@
 import psycopg2 as psy
 import datetime as time
+from threading import Thread
 
 path_to_querys_file = 'C:\\Users\\RybakSA\\Desktop\\Скрипты постгрес\\!!!!!work\\1с\\logs\\!query.txt'
 
@@ -27,6 +28,7 @@ def main(path_to_querys_file):
             for index, text_query in enumerate(file):
                 try:
                     run_db_query(pg_cursor, text_query)
+                    #time.sleep(0.001)
                 except (Exception, psy.Error) as error:
                     if error is ' no results to fetch':
                         pg_cursor.execute("ROLLBACK")
@@ -42,9 +44,27 @@ def main(path_to_querys_file):
             print("PostgreSQL connection is closed")
         else:
             print("PostgreSQL connection didn't close")
+        return
 
 if __name__ == '__main__':
     start_time = time.datetime.now()
-    main(path_to_querys_file)
+
+    # starting parallel threads
+    processThread = Thread(target=main(path_to_querys_file))
+    processThread2 = Thread(target=main(path_to_querys_file))
+    processThread3 = Thread(target=main(path_to_querys_file))
+    processThread4 = Thread(target=main(path_to_querys_file))
+    #print("run 1")
+    processThread.start()
+    #print("run 2")
+    processThread2.start()
+    processThread3.start()
+    processThread4.start()
+    processThread.join()
+    processThread2.join()
+    processThread3.join()
+    processThread4.join()
+
+    # show time of working
     print("Start time:%s:%s:%s" % (start_time.hour, start_time.minute, start_time.second))
     print("End time:%s:%s:%s" % (time.datetime.now().hour, time.datetime.now().minute, time.datetime.now().second))
